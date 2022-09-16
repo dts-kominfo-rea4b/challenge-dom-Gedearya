@@ -5,37 +5,149 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Challenge - DOM</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        display: flex;
+        min-height: 100vh;
+        padding: 20px;
+        background-color: #fbf2cf;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      #app {
+        display: flex;
+        align-items: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 40%;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #c6ebc5;
+        border: 2px solid black;
+      }
+
+      #todo-title,
+      #todo-subtitle {
+        display: flex;
+        justify-content: center;
+        color: #003546;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      #todo-input[type="text"] {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 15px;
+        border: 1px solid black;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+        font-size: larger;
+      }
+
+      #todo-submit {
+        background-color: #a1c298;
+        color: white;
+        font-size: large;
+        padding: 12px 20px;
+        border: 1px solid #3d8361;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      #todo-submit:hover {
+        background-color: #3d8361;
+        transition: 0.7s;
+      }
+
+      .center {
+        width: 30%;
+        margin: 0 auto;
+        display: block;
+      }
+
+      #todo-output {
+        width: 100%;
+        align-items: left;
+        margin-top: 10px;
+        margin-left: 20px;
+        font-size: large;
+      }
+
+      ::placeholder {
+        color: #9fa8ab;
+        text-align: center;
+      }
+    </style>
   </head>
+
   <body>
     <div id="app">
       <!-- TODO: Buatlah sebuah header dengan id todo-title -->
+      <header id="todo-title">
+        <h2>To-Do List</h2>
+      </header>
       <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+      <subtitle id="todo-subtitle">
+        <h2>~ Today I need to ~</h2>
+      </subtitle>
 
       <!-- Section: input -->
       <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
+      <input type="text" id="todo-input" placeholder="Enter new activity" />
       <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
-
+      <button class="center" id="todo-submit">Submit</button>
       <!-- Section output -->
       <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+      <ul id="todo-output"></ul>
     </div>
 
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
     <script>
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+      let button = document.querySelector("#todo-submit");
+      let input = document.querySelector("#todo-input");
+      let output = document.querySelector("#todo-output");
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler() {
+        if (document.querySelector("#todo-input").value.length == 0) {
+          alert("Please Enter an Activity");
+        } else {
+          let li = document.createElement("li");
+
+          li.append(document.createTextNode(input.value));
+          output.append(li);
+          input.value = "";
+        }
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
-      
+      button.addEventListener("click", fnClickHandler);
+
       // TODO: register event onkeypress / addEventListener untuk input
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+      input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          fnClickHandler();
+        }
+      });
     </script>
   </body>
 </html>
