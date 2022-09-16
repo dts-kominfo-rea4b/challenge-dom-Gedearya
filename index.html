@@ -126,15 +126,11 @@
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
       function fnClickHandler() {
-        if (document.querySelector("#todo-input").value.length == 0) {
-          alert("Please Enter an Activity");
-        } else {
-          let li = document.createElement("li");
+        let li = document.createElement("li");
 
-          li.append(document.createTextNode(input.value));
-          output.append(li);
-          input.value = "";
-        }
+        li.append(document.createTextNode(input.value));
+        output.append(li);
+        input.value = "";
       }
 
       // TODO: register event onclick / addEventListener untuk button
